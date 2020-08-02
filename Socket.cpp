@@ -93,8 +93,6 @@ int sock::receiveData(std::string adat, INPUT ip) {
 			iSendResult = send(ClientSocket, recvbuf, iResult, 0);
 			if (iSendResult == SOCKET_ERROR) {
 				std::cerr << "Send failed: " << WSAGetLastError() << "\n";
-				closesocket(ClientSocket);
-				WSACleanup();
 				return 1700;
 			}
 			/*printf("Bytes sent: %d\n", iSendResult);*/
@@ -105,8 +103,6 @@ int sock::receiveData(std::string adat, INPUT ip) {
 		}
 		else {
 			std::cerr << "Receive failed: " << WSAGetLastError() << "\n";
-			closesocket(ClientSocket);
-			WSACleanup();
 			return 1800;
 		}
 

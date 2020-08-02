@@ -18,11 +18,14 @@ config::config() :file("config.cfg"), data("F5"),port("2510"),vkey(0x74) {
 			if (name == "DATA")
 				data = value;
 			else if (name == "PORT")
-				if (value.length() == 4 && value!="0000")
+				if (value.length() == 4 && value != "0000")
 					port = value;
 				else std::cerr << "Config error. Wrong port number. \n";
 			else if (name == "VKEY")
-				vkey =  stoi(value);
+			{
+				if (value>"0x00" && value<"0xff")
+					vkey = stoi(value, 0, 16);
+			}
 		}
 
 	}
